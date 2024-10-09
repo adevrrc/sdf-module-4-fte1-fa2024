@@ -6,12 +6,20 @@ Usage: python guessing_game.py
 """
 
 from random import randint
+import logging as log
+
+log.basicConfig(level=log.DEBUG)
+
+# __main__
+logger = log.getLogger(__name__)
 
 title_text: str = "** JELLYBEAN GUESSING GAME **"
 
 LOW_RANGE: int = 1
 HIGH_RANGE: int = 10
 NUMBER_OF_JELLYBEANS: int = randint(LOW_RANGE, HIGH_RANGE)
+
+logger.debug(f"Number of jellybeans: {NUMBER_OF_JELLYBEANS}")
 
 guess_count: int = 0
 
@@ -41,11 +49,16 @@ while not jellybeans_guessed:
                 print(f"Your guess must be between {LOW_RANGE}-{HIGH_RANGE}.")
                 prompt_text = f"Guess ({LOW_RANGE}-{HIGH_RANGE}): "
         except ValueError as exception:
+            logger.exception(f"ValueError: The user entered {guess}.", \
+                             exc_info=False)
+            
             print("You must enter a whole number.")
             
             prompt_text = "Re-enter guess: "
 
     guess_count += 1
+
+    logger.info(f"Guess count is {guess_count}")
 
     jellybeans_guessed = guess == NUMBER_OF_JELLYBEANS
 
