@@ -12,8 +12,16 @@ filename = "data.txt"
 file_path = f"{script_directory}/{filename}"
 data_file = None
 
-with open(file_path) as data_file:
-    for record in data_file:
-        print(record)
+try:
+    with open(file_path, "r") as data_file:
+        for record in data_file:
+            print(record)
+except FileNotFoundError:
+    # Log error a file
+    # SMS message
+    print(f"The {filename} was not found.")
+except PermissionError:
+    print(f"The user you are logged in as does "
+          "not have permission to the file.")
 
 input("Press <enter> to continue...")
