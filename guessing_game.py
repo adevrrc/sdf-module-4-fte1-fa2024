@@ -18,12 +18,12 @@ guess_count: int = 0
 print(title_text)
 print("=" * len(title_text))
 
-prompt_text = "Enter your guess: "
+prompt_text: str = "Enter your guess: "
 
-jellybeans_guessed = False
+jellybeans_guessed: bool = False
 
 while not jellybeans_guessed:
-    guess_is_out_of_range = True
+    guess_is_out_of_range: bool = True
 
     if guess_count > 0:
         print("That guess is incorrect.")
